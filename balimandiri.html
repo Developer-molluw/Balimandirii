@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bali Mandiri Rental | Sewa Mobil & Motor Murah</title>
+    <style>
+        /* --- 1. SETTING VARIABEL (SOLUSI BIAR GA PUDAR) --- */
+        :root {
+            --bg-body: #f9f9f9;
+            --bg-nav: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #333;
+            --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            /* Shadow Label (Light Mode) */
+            --label-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            --label-bg: #ffffff;
+        }
+
+        body.dark-mode-active {
+            --bg-body: #121212;
+            --bg-nav: #1e1e1e;
+            --bg-card: #1e1e1e;
+            --text-main: #f1f1f1;
+            --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            /* Shadow Label (Dark Mode - PUTIH BENING) */
+            --label-shadow: rgba(255, 255, 255, 0.15) 0px 10px 20px, rgba(255, 255, 255, 0.1) 0px 6px 6px;
+            --label-bg: #1e1e1e;
+        }
+
+        /* --- 2. SETTING DASAR --- */
+        html { scroll-behavior: smooth; }
+        * { 
+            margin: 0; padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Poppins', 'Segoe UI', sans-serif; 
+            -webkit-text-size-adjust: 100%;
+        }
+        body { 
+            line-height: 1.6; 
+            color: var(--text-main); 
+            background-color: var(--bg-body);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* --- 3. NAVIGATION --- */
+        nav {
+            background: var(--bg-nav);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 7%;
+            box-shadow: var(--nav-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #FF2800 0%, #B90000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links { list-style: none; display: flex; align-items: center; }
+        .nav-links li { margin-left: 25px; }
+        .nav-links a { color: var(--text-main); font-weight: 600; text-decoration: none; transition: 0.3s; }
+        .nav-links a:hover { color: #FF2800; }
+
+        /* Google Translate Styling */
+        .goog-te-gadget-simple {
+            background-color: rgba(255,255,255,0.1) !important;
+            border: 1px solid #FF2800 !important;
+            padding: 5px !important;
+            border-radius: 5px !important;
+            cursor: pointer !important;
+        }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { width: 28px; height: 3px; background: var(--text-main); border-radius: 2px; }
+
+        /* --- 4. HERO SECTION --- */
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1350&q=80'); 
+            height: 70vh; 
+            background-size: cover; 
+            background-position: center; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            color: white; text-align: center; padding: 0 20px; 
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .btn-cta { 
+            background: linear-gradient(135deg, #FF2800 0%, #B90000 100%); 
+            color: #fff; padding: 15px 35px; text-decoration: none; border-radius: 10px; font-weight: bold; 
+            transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 40, 0, 0.4);
+        }
+        .btn-cta:hover { transform: scale(1.05); }
+
+        /* --- 5. VEHICLE SECTION --- */
+        .container { padding: 4rem 7%; }
+        
+        .section-title { text-align: center; margin-bottom: 4rem; font-size: 2.5rem; color: var(--text-main); }
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 4px; background: #FF2800; margin: 10px auto;
+        }
+
+        .category-label {
+            text-align: center; 
+            margin: 40px 0 30px 0;
+            font-size: 2.2rem;
+            color: #FF2800;
+            font-weight: 700;
+            position: relative;
+            background-color: var(--label-bg);
+            box-shadow: var(--label-shadow);
+            padding: 20px 0px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .category-label::after {
+            content: ''; display: block; width: 60px; height: 4px; background: #FF2800; margin: 8px auto;
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2.5rem; 
+            margin-bottom: 60px;
+        }
+
+        .card { 
+            background: var(--bg-card); 
+            border: 2px solid #FF2800; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            transition: 0.4s; 
+            box-shadow: var(--card-shadow); 
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(255, 40, 0, 0.2); }
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-content { padding: 1.5rem; }
+        .card-content h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--text-main); }
+        .price { color: #FF2800; font-weight: 800; font-size: 1.4rem; margin: 15px 0; }
+        
+        .btn-wa { 
+            display: block; 
+            background: linear-gradient(135deg, #FF2800 0%, #B90000 100%); 
+            color: white; text-align: center; 
+            padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s;
+        }
+
+        .btn-wa:hover {
+    background: linear-gradient(135deg, #B90000 0%, #FF2800 100%); /* Warna dibalik */
+    /*transform: translateY(-3px); /* Tombol sedikit naik */
+    box-shadow: 0 5px 15px rgba(255, 40, 0, 0.4); /* Efek bayangan menyala */
+}
+
+        /* --- 6. FOOTER --- */
+        footer { background: #2c3e50; color: white; text-align: center; padding: 3rem; margin-top: 50px; }
+
+        /* Theme Switch Button */
+        .theme-switch {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: 1px solid #FF2800;
+            border-radius: 20px;
+            background: transparent;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            margin-left: 20px;
+            color: var(--text-main);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed; top: 70px; right: -100%; 
+                background: var(--bg-nav); width: 100%; 
+                flex-direction: column; text-align: center;
+                transition: 0.4s; box-shadow: var(--nav-shadow);
+                padding: 20px 0;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 15px 0; margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Bali Mandiri</div>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#armada">Fleet</a></li>
+            <li><a href="#kontak">Contact</a></li>
+            <li><div id="google_translate_element"></div></li>
+            <li><div class="theme-switch" id="dark-toggle">🌙 Mode</div></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Safe & Comfortable Vehicle Rental</h1>
+        <p style="margin-bottom: 2rem; font-size: 1.2rem;">The best transportation solution for your holiday in Bali.</p>
+        <a href="#armada" class="btn-cta">Check Fleet Options</a>
+    </section>
+
+    <section class="container" id="armada">
+        <h2 class="section-title">Vehicle Choice</h2>
+
+        <h3 class="category-label">Daily Rental</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="NMAX1552020.jpeg" alt="Nmax">
+                <div class="card-content">
+                    <h3>Nmax 155 cc / 2020 Package (Daily)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Comfortable & Wide Seat</p>
+                    <p class="price">Rp 90.000 / Daily</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Order via WhatsApp</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="FILANO.jpeg" alt="Filano">
+                <div class="card-content">
+                    <h3>Filano 125cc Package (Daily)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Modern Motorcycle Design</p>
+                    <p class="price">Rp 85.000 / Daily</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Order via WhatsApp</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=500&q=60" alt="Fazzio">
+                <div class="card-content">
+                    <h3>Fazzio 125cc Package (Daily)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Suitable for small size motorbikes</p>
+                    <p class="price">Rp 70.000 / Daily</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Order via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="category-label">Weekly Rental</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="NMAX1552020.jpeg" alt="Nmax Mingguan">
+                <div class="card-content">
+                    <h3>Nmax 155cc / 2020 Package (Weekly)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Comfortable & Wide Seat</p>
+                    <p class="price">Rp 550.000 / Weekly</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Order via WhatsApp</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="FILANO.jpeg" alt="Filano Mingguan">
+                <div class="card-content">
+                    <h3>Filano 125cc Package (Weekly)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Modern Motorcycle Design</p>
+                    <p class="price">Rp 550.000 / Weekly</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Order via WhatsApp</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=60" alt="Fazzio Mingguan">
+                <div class="card-content">
+                    <h3>Fazzio 125cc Package (Weekly)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Suitable for small size motorbikes</p>
+                    <p class="price">Rp 550.000 / Weekly</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Order via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="category-label">Monthly Rent - 15%🏷️</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="NMAX1552020.jpeg" alt="Nmax Bulanan">
+                <div class="card-content">
+                    <h3>Nmax 155 cc / 2020 Package (Monthly)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Comfortable & Wide Seat</p>
+                    <p class="price">Rp. 1.350.000 / Monthly</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Check Monthly Prices</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="FILANO.jpeg" alt="Filano Bulanan">
+                <div class="card-content">
+                    <h3>Filano 125cc Package (Monthly)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Modern Motorcycle Design</p>
+                    <p class="price">Rp. 1.000.000 / Monthly</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Check Monthly Prices</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=500&q=60" alt="Fazzio Bulanan">
+                <div class="card-content">
+                    <h3>Fazzio 125cc Package (Monthly)</h3>
+                    <p>✨ Free 1 Helmet</p>
+                    <p>✨ Suitable for small size motorbikes</p>
+                    <p class="price">Rp. 800.000 / Monthly</p>
+                    <a href="https://wa.me/6281353018785" class="btn-wa">Check Monthly Prices</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Bali Mandiri Rental</h3>
+        <p>Jl. Raya Utama No. 123, Bali, Indonesia</p>
+        <p>WhatsApp: 0813-5301-8785</p>
+        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 20px;">&copy; 2024 Bali Mandiri Rental</p>
+    </footer>
+
+    <script>
+        // Navbar
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+        // Dark Mode Logic
+        const darkToggle = document.getElementById('dark-toggle');
+        const bodyElement = document.body;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            bodyElement.classList.add('dark-mode-active');
+            darkToggle.innerText = '☀️ Mode';
+        }
+
+        darkToggle.addEventListener('click', () => {
+            bodyElement.classList.toggle('dark-mode-active');
+            const isDark = bodyElement.classList.contains('dark-mode-active');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            darkToggle.innerText = isDark ? '☀️ Mode' : '🌙 Mode';
+        });
+
+        // Google Translate Init
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'id,en',
+                includedLanguages: 'id,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
